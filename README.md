@@ -10,11 +10,11 @@ Look at what item U(User or Customer) like, and then check if X(Items Profile) i
 
 ## Workflow of Content-based Recommendation
 
-1. User *like* Item Profile. 
+1. User *like* **Item Profile**. 
     - for example. user like Frozon 2 (movie)
-2. System build Item Profile to User Profile, 
+2. System build **Item Profile** to **User Profile**, 
     - for example. Frozen 2 to Directors(Chris Buck, Jennifer Lee), Categories(Animation, Adventure, Fantasy)
-3. System Predict Item similar(match) with User Profile
+3. System Predict Item similar(match) with **User Profile**
 4. System return Recommendation Item to User
 
 
