@@ -11,13 +11,13 @@ func main() {
 
 	// Init Categories
 	cl := contentbase.InitItemCategories()
-	cl.NewCategories("cat_1", "Action")
-	cl.NewCategories("cat_2", "Adventure")
-	cl.NewCategories("cat_3", "Drama")
-	cl.NewCategories("cat_4", "Horror")
-	cl.NewCategories("cat_5", "Sci-fi")
-	cl.NewCategories("cat_6", "War")
-	cl.NewCategories("cat_7", "Western")
+	cl.NewCategories("action", "Action")
+	cl.NewCategories("advent", "Adventure")
+	cl.NewCategories("drama", "Drama")
+	cl.NewCategories("horror", "Horror")
+	cl.NewCategories("sci_fi", "Sci-fi")
+	cl.NewCategories("war", "War")
+	cl.NewCategories("western", "Western")
 	println("Categories List:")
 	println(fmt.Sprintf("%v", cl))
 
@@ -27,10 +27,14 @@ func main() {
 	itp.NewItemProfile("m2", "movie_2", []string{"Drama"})
 	itp.NewItemProfile("m3", "movie_3", []string{"Horror", "Sci-fi"})
 	itp.NewItemProfile("m4", "movie_4", []string{"Action", "Adventure", "Sci-fi", "War"})
+	itp.NewItemProfile("m5", "movie_5", []string{"Sci-fi", "Adventure"})
+	itp.NewItemProfile("m6", "movie_6", []string{"Sci-fi", "Horror"})
 
 	// Create table Item and Categories
 	itp.ItemAttributeValue(cl)
 
 	// Init User Profile
 	// upf.UserItemRating()
+
+	// Predict item by using UserProfile frequency
 }

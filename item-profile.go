@@ -17,8 +17,6 @@ type ItemProfile struct {
 	Categories []string
 }
 
-// ItemProfile["ItemID"].Categories["Action"]
-
 // InitItemProfiles is function for init ItemProfile memory
 func InitItemProfiles() *ItemList {
 	return &ItemList{
