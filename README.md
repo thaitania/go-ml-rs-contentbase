@@ -2,22 +2,6 @@
 
 Golang Machine Learning for build Recommendation System by using Content-based
 
-## What is the result when you use the Content-based Recommendation
-
-Look at what item U(User or Customer) like, and then check if X(Items Profile) is similar.
-
-**item similarity** = **Content-based Filtering**
-
-## Workflow of Content-based Recommendation
-
-1. User *like* **Item Profile**. 
-    - for example. user like Frozon 2 (movie)
-2. System build **Item Profile** to **User Profile**, 
-    - for example. Frozen 2 to Directors(Chris Buck, Jennifer Lee), Categories(Animation, Adventure, Fantasy)
-3. System Predict Item similar(match) with **User Profile**
-4. System return Recommendation Item to User
-
-
 ## Explaination Variable
 
 ### Item Profile
@@ -30,6 +14,10 @@ item profile is data to contain value for
 - example 2: the *director*. some viewers have a preference for the work of contain directors.
 - example 3: The *genre* or *general type* of the movie. Some viewers like only comedies, other dramas or romances.
 - example 4: The *year* in which the movie was made. Some viewers prefer old movies; other watch only the latest releases.
+
+### User Profile
+
+user profile is data of user
 
 ---
 
@@ -54,3 +42,5 @@ item profile is data to contain value for
 
 1. [9.2 Content-Based Recommendations : Recommendation Systems (PDF)](http://infolab.stanford.edu/~ullman/mmds/ch9.pdf)
 2. [Recommender Systems Content based Filtering (Video)](https://www.youtube.com/watch?v=mM-zK_g34Rc)
+3. [Content Based Recommendations | Stanford University](https://youtu.be/2uxXPzm-7FY)
+4. [A Multi-Criteria Recommendation System based on Hybrid Profile](https://www.dpu.ac.th/dpurc/assets/uploads/magazine/e37psnbrivk8g4k.pdf)

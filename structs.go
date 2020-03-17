@@ -1,28 +1,18 @@
 package contentbase
 
-// UserProfile is struct for contain User Profile Data
 type UserProfile struct {
-	ID           string                          `json:"id"`            // ID of user
-	Item         string                          `json:"item"`          // Item data
-	Rating       float32                         `json:"rating"`        // Rating of item, it's must be 0.00 - 5.00
-	UserProfiles map[string][]UserProfileContent `json:"user_profiles"` // Profiles of user, generate from System after user pick item
+	UserData map[string][]UserItemRating
 }
 
-// UserProfileContent is function for contain key, value of user profile
-type UserProfileContent struct {
-	Key   string
-	Value string
-}
+// UserProfile["UserID"]
 
-// ItemProfile is struct for contain Item Profile Data
-type ItemProfile struct {
-	ID       string                          `json:"id"`            // ID of item
-	Name     string                          `json:"name"`          // Name of item
-	Profiles map[string][]ItemProfileContent `json:"item_profiles"` // Profiles of item
-}
+// 1. foreach UserProfile ได้แกน y
+// 2. plot หัวตารางแกน x โดยใช้ Categories ทั้งหมด
+// 3. ดูว่า UserProfile มีข้อมูล Categories ไหนบ้าง และ เขียน overall scroll
+// 4. หาค่าของความชอบ ว่า User ชอบคอนเทนต์แบบไหนมากที่สุด
+// 5. นำเสนอ Item ที่มีความชอบคล้ายคลึงกับ User Profile ที่สุด แล้วเรียงลำดับ
 
-// ItemProfileContent is struct for contain Item Profile Content
-type ItemProfileContent struct {
-	Key   string
-	Value string
+type UserItemRating struct {
+	ItemID string
+	Rating int
 }
