@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	contentbase "github.com/thaitania/go-ml-rs-contentbase"
@@ -50,15 +51,26 @@ func main() {
 
 	// Init User Profile
 	upf := contentbase.InitUserProfile()
-	upf.NewUserProfile("user1", "m1", 3)
-	upf.NewUserProfile("user1", "m6", 4)
+	upf.NewUserProfile("user1", "m1", 5)
+	upf.NewUserProfile("user1", "m6", 5)
 
-	upf.NewUserProfile("user2", "m2", 5)
-	upf.NewUserProfile("user2", "m4", 1)
-	upf.NewUserProfile("user2", "m5", 1)
+	// upf.NewUserProfile("user2", "m2", 5)
+	// upf.NewUserProfile("user2", "m4", 1)
+	// upf.NewUserProfile("user2", "m5", 1)
 	// println(fmt.Sprintf("%v", upf))
 
-	// Predict item by using UserProfile frequency
+	// Generate score of sequence categories of user
+	// Frequency is calculate by frequency of Categories only. (calculate without Rating weight)
+	// score result must be 0.00 - 1.00 (result meaning: 0.00 is user never watch movie in category, 1.00 is user watch movie in category very often)
 	println("============== GetScoreByCategoriesFrequency ==============")
-	contentbase.GetScoreByCategoriesFrequency(upf, iav)
+	uppf, _ := contentbase.GetScoreByCategoriesFrequency(upf, iav)
+	for k, v := range uppf.UserData {
+		println("Result=", k, fmt.Sprintf("%v", v))
+	}
+
+	// println("============== GetScoreByCategoriesFrequencyAndRatingWeight ==============")
+	// uppfr, _ := contentbase.GetScoreByCategoriesFrequencyWithRating(upf, iav)
+	// for k, v := range uppfr.UserData {
+	// 	println("Result=", k, fmt.Sprintf("%v", v))
+	// }
 }
