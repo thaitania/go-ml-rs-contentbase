@@ -25,9 +25,16 @@ func InitItemProfiles() *ItemList {
 }
 
 // NewItemProfile is function for add new item in list
-func (ip *ItemList) NewItemProfile(itemID string, title string, categories []string) error {
+func (ip *ItemList) NewItemProfile(cl *ItemCategories, itemID string, title string, categories []string) error {
 	if itemID == "" {
 		return errors.New("ItemProfile must have ID")
+	}
+	if cl.AutoAddNewCategories == true {
+		for _, e := range categories {
+			if indexOfCategories(e, cl.Categories) == -1 {
+				cl.NewCategories(e)
+			}
+		}
 	}
 	ip.ItemProfile[itemID] = ItemProfile{
 		ItemID:     itemID,
@@ -42,18 +49,20 @@ func (ip *ItemList) ItemAttributeValue(cl *ItemCategories) error {
 	catKeyArr := []string{}
 	catArr := []string{}
 	for _, e := range cl.Categories {
-		catKeyArr = append(catKeyArr, e.ID)
+		catKeyArr = append(catKeyArr, e.Title)
 		catArr = append(catArr, e.Title)
 	}
 	println("==============================")
 	println(fmt.Sprintf("%v", catArr))
-	println("==============================", len(ip.ItemProfile))
+	println("==============================: Num User: ", len(ip.ItemProfile))
 	itemList := make(map[string][]int)
 	for _, ee := range ip.ItemProfile {
 		x := make([]int, len(catArr))
 		for _, eee := range ee.Categories {
 			ido := indexOf(eee, catArr)
-			x[ido] = 1
+			if ido >= 0 {
+				x[ido] = 1
+			}
 		}
 		itemList[ee.ItemID] = x
 		println(ee.ItemID, fmt.Sprintf("%v", itemList[ee.ItemID]))
