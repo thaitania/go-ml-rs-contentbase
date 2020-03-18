@@ -3,6 +3,7 @@ package contentbase
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 // ItemList is struct for contain item profile list
@@ -15,6 +16,12 @@ type ItemProfile struct {
 	ItemID     string
 	Title      string
 	Categories []string
+}
+
+// ItemAttributeValueData is struct for contain ItemAttributeValue list
+type ItemAttributeValueData struct {
+	Categories []string
+	Value      map[string][]int
 }
 
 // InitItemProfiles is function for init ItemProfile memory
@@ -45,16 +52,14 @@ func (ip *ItemList) NewItemProfile(cl *ItemCategories, itemID string, title stri
 }
 
 // ItemAttributeValue is function for render Item-Attribute Value (IAB)
-func (ip *ItemList) ItemAttributeValue(cl *ItemCategories) error {
-	catKeyArr := []string{}
+func (ip *ItemList) ItemAttributeValue(cl *ItemCategories) (*ItemAttributeValueData, error) {
 	catArr := []string{}
+	if len(cl.Categories) == 0 {
+		return &ItemAttributeValueData{}, errors.New("Categories list is empty: length=" + strconv.Itoa(len(cl.Categories)))
+	}
 	for _, e := range cl.Categories {
-		catKeyArr = append(catKeyArr, e.Title)
 		catArr = append(catArr, e.Title)
 	}
-	println("==============================")
-	println(fmt.Sprintf("%v", catArr))
-	println("==============================: Num User: ", len(ip.ItemProfile))
 	itemList := make(map[string][]int)
 	for _, ee := range ip.ItemProfile {
 		x := make([]int, len(catArr))
@@ -65,7 +70,22 @@ func (ip *ItemList) ItemAttributeValue(cl *ItemCategories) error {
 			}
 		}
 		itemList[ee.ItemID] = x
-		println(ee.ItemID, fmt.Sprintf("%v", itemList[ee.ItemID]))
+	}
+
+	return &ItemAttributeValueData{Categories: catArr, Value: itemList}, nil
+}
+
+// PrintGUIItemAttributeValue is function for print ItemAttributeValue in Command line interface
+func PrintGUIItemAttributeValue(iacd *ItemAttributeValueData) error {
+	if len(iacd.Categories) == 0 {
+		return errors.New("Categories list is empty: length=" + strconv.Itoa(len(iacd.Categories)))
+	}
+	if len(iacd.Value) == 0 {
+		return errors.New("ItemProfile list is empty: length=" + strconv.Itoa(len(iacd.Value)))
+	}
+	println(fmt.Sprintf("%v", iacd.Categories))
+	for k, v := range iacd.Value {
+		println(k, fmt.Sprintf("%v", v))
 	}
 
 	return nil

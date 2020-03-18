@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	contentbase "github.com/thaitania/go-ml-rs-contentbase"
 )
 
@@ -10,7 +12,7 @@ func main() {
 	// Init Categories
 	// if true: when you add new ItemProfile and categories doesn't exist, system will add categories to the categories list
 	// if false: system will add categories by function NewCategories("id", "title") only!
-	cl := contentbase.InitItemCategories(false)
+	cl := contentbase.InitItemCategories(true)
 	cl.NewCategories("Action")
 	cl.NewCategories("Adventure")
 	cl.NewCategories("Drama")
@@ -27,6 +29,8 @@ func main() {
 	// }
 	// Init Item Profile
 	itp := contentbase.InitItemProfiles()
+	itp.NewItemProfile(cl, "m1", "movie_1", []string{"Action"})
+	// If ItemProfile is duplicate, system will replace with new ItemProfile Data instead
 	itp.NewItemProfile(cl, "m1", "movie_1", []string{"Action", "Adventure", "Western"})
 	itp.NewItemProfile(cl, "m2", "movie_2", []string{"Drama"})
 	itp.NewItemProfile(cl, "m3", "movie_3", []string{"Horror", "Sci-fi"})
@@ -35,7 +39,15 @@ func main() {
 	itp.NewItemProfile(cl, "m6", "movie_6", []string{"Sci-fi", "Horror"})
 
 	// Create table Item and Categories
-	itp.ItemAttributeValue(cl)
+	iav, err := itp.ItemAttributeValue(cl)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = contentbase.PrintGUIItemAttributeValue(iav)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Init User Profile
 	// upf.UserItemRating()

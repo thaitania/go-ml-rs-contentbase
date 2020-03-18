@@ -1,6 +1,9 @@
 package contentbase
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 // ItemCategories is stuct for contain categories list of item
 type ItemCategories struct {
@@ -33,7 +36,7 @@ func (itc *ItemCategories) NewCategories(title string) error {
 	}
 
 	itc.Categories = append(itc.Categories, ItemCategoriesData{
-		Title: title,
+		Title: strings.ToLower(title),
 	})
 	return nil
 }
@@ -41,7 +44,7 @@ func (itc *ItemCategories) NewCategories(title string) error {
 // indexOf is function for find index by array
 func indexOf(word string, data []string) int {
 	for k, v := range data {
-		if word == v {
+		if strings.ToLower(word) == v {
 			return k
 		}
 	}
@@ -50,7 +53,7 @@ func indexOf(word string, data []string) int {
 
 func indexOfCategories(word string, data []ItemCategoriesData) int {
 	for k, v := range data {
-		if v.Title == word {
+		if strings.ToLower(word) == v.Title {
 			return k
 		}
 	}
