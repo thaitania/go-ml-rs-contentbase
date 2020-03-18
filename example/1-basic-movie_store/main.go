@@ -10,7 +10,7 @@ func main() {
 	println("=========== Example Movie Store =============")
 
 	// Init Categories
-	cl := contentbase.InitItemCategories()
+	cl := contentbase.InitItemCategories(false)
 	cl.NewCategories("action", "Action")
 	cl.NewCategories("advent", "Adventure")
 	cl.NewCategories("drama", "Drama")
@@ -18,6 +18,13 @@ func main() {
 	cl.NewCategories("sci_fi", "Sci-fi")
 	cl.NewCategories("war", "War")
 	cl.NewCategories("western", "Western")
+
+	// If you need to check duplicate category, just check error by err := cl.NewCategories("action", "Action")
+	// err := cl.NewCategories("action", "Action")
+	// if err != nil {
+	// 	panic(err)
+	// }
+
 	println("Categories List:")
 	println(fmt.Sprintf("%v", cl))
 

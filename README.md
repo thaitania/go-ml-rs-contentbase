@@ -1,6 +1,12 @@
 # go-ml-rs-contentbase
 
-Golang Machine Learning for build Recommendation System by using Content-based
+Recommendation System by using Content-based methodology for Golang 
+
+# Getting Started
+
+
+# Example
+
 
 ---
 
